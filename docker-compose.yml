@@ -10,8 +10,6 @@ services:
       MYSQL_PASSWORD: devP
     ports:
       - "3307:3306"
-    volumes:
-      - ./data:/var/lib/golangserver
 
   golangserver:
     build:
