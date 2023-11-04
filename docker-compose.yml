@@ -31,5 +31,5 @@ services:
     depends_on:
       - golangserverdb
     volumes:
-      - ./app/database/migrations:/app/database/migrations
+      - ./app/database/migrations:/golangserver/database/migrations
     ports: ['4085:4080']

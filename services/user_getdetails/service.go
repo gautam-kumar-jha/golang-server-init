@@ -72,8 +72,8 @@ func processData(userID string, DBProcessor *sql.DB, config db.Config) (bool, in
 	cQuery := `SELECT * FROM UserProfile where userID = ? `
 	err = DBProcessor.QueryRow(cQuery, userID).Scan(&response.UserID, &response.Name, &response.Email, &addressJSON)
 	if err != nil && err != sql.ErrNoRows {
-		log.Printf("unable to find home address %s", err.Error())
-		return false, response, fmt.Errorf("unable to find home address")
+		log.Printf("unable to user details %s", err.Error())
+		return false, response, fmt.Errorf("unable to find user details %s", userID)
 	}
 	_ = json.Unmarshal([]byte(addressJSON), &address)
 	response.Address = address
