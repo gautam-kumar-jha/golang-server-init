@@ -1,6 +1,7 @@
 package register
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -34,7 +35,7 @@ func (registerService service) GetHandler() es.Handler {
 	}
 }
 
-func (registerService service) Execute(req *http.Request) (es.ResponseEnvelope, int) {
+func (registerService service) Execute(context context.Context, req *http.Request) (es.ResponseEnvelope, int) {
 
 	request := Request{}
 	response := es.ResponseEnvelope{}

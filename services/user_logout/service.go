@@ -1,6 +1,7 @@
 package logout
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"golang-server-init/app"
@@ -31,7 +32,7 @@ func (login service) GetHandler() es.Handler {
 	}
 }
 
-func (login service) Execute(req *http.Request) (es.ResponseEnvelope, int) {
+func (login service) Execute(context context.Context, req *http.Request) (es.ResponseEnvelope, int) {
 
 	response := es.ResponseEnvelope{}
 

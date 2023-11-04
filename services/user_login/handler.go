@@ -1,13 +1,16 @@
 package login
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
 
+// Login used to call login
 var Login = func() http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, req *http.Request) {
-		response, statusCode := login.Execute(req)
+		ctx := context.TODO()
+		response, statusCode := login.Execute(ctx, req)
 		generateResponse(responseWriter, statusCode, response)
 	}
 }

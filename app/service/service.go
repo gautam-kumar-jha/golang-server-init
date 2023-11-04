@@ -1,8 +1,11 @@
 package service
 
-import "net/http"
+import (
+	"context"
+	"net/http"
+)
 
 type Service interface {
 	GetHandler() Handler
-	Execute(req *http.Request) (ResponseEnvelope, int)
+	Execute(context context.Context, req *http.Request) (ResponseEnvelope, int)
 }

@@ -1,13 +1,15 @@
 package token
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
 
 var Token = func() http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, req *http.Request) {
-		response, statusCode := token.Execute(req)
+		ctx := context.TODO()
+		response, statusCode := token.Execute(ctx, req)
 		generateResponse(responseWriter, statusCode, response)
 	}
 }

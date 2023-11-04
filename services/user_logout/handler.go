@@ -1,13 +1,16 @@
 package logout
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
 
+// Logout used to call logout
 var Logout = func() http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, req *http.Request) {
-		response, statusCode := logout.Execute(req)
+		ctx := context.TODO()
+		response, statusCode := logout.Execute(ctx, req)
 		generateResponse(responseWriter, statusCode, response)
 	}
 }

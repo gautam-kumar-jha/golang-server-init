@@ -1,13 +1,15 @@
 package register
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
 
 var RegisterUser = func() http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, req *http.Request) {
-		response, statusCode := regUser.Execute(req)
+		ctx := context.TODO()
+		response, statusCode := regUser.Execute(ctx, req)
 		generateResponse(responseWriter, statusCode, response)
 	}
 }
