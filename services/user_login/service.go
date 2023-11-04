@@ -1,6 +1,7 @@
 package login
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -8,7 +9,7 @@ import (
 	db "golang-server-init/app/database"
 	es "golang-server-init/app/service"
 	"golang-server-init/utils"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -36,11 +37,11 @@ func (login service) GetHandler() es.Handler {
 	}
 }
 
-func (login service) Execute(req *http.Request) (es.ResponseEnvelope, int) {
+func (login service) Execute(context context.Context, req *http.Request) (es.ResponseEnvelope, int) {
 	request := Request{}
 	response := es.ResponseEnvelope{}
 
-	reqBody, err := ioutil.ReadAll(req.Body)
+	reqBody, err := io.ReadAll(req.Body)
 	if err != nil {
 		response.IsSucess = false
 		response.Message = "can not read request."

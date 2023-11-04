@@ -1,13 +1,15 @@
 package updateprofile
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
 
 var SetAddress = func() http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, req *http.Request) {
-		response, statusCode := updateProfile.Execute(req)
+		ctx := context.TODO()
+		response, statusCode := updateProfile.Execute(ctx, req)
 		generateResponse(responseWriter, statusCode, response)
 	}
 }

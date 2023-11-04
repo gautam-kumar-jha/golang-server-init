@@ -1,6 +1,7 @@
 package getdetails
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -33,7 +34,7 @@ func (getUserDetails service) GetHandler() es.Handler {
 	}
 }
 
-func (getUserDetails service) Execute(req *http.Request) (es.ResponseEnvelope, int) {
+func (getUserDetails service) Execute(context context.Context, req *http.Request) (es.ResponseEnvelope, int) {
 	response := es.ResponseEnvelope{}
 
 	userID, statusCode, err := validateRequest(req, getUserDetails.dbProcessor, getUserDetails.config.DatabaseConfig)

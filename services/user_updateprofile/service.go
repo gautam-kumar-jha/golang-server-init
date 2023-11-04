@@ -1,6 +1,7 @@
 package updateprofile
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -34,7 +35,7 @@ func (registerService service) GetHandler() es.Handler {
 	}
 }
 
-func (setAddress service) Execute(req *http.Request) (es.ResponseEnvelope, int) {
+func (setAddress service) Execute(context context.Context, req *http.Request) (es.ResponseEnvelope, int) {
 
 	request := Request{}
 	response := es.ResponseEnvelope{}

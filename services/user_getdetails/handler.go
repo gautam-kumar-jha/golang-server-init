@@ -1,6 +1,7 @@
 package getdetails
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
@@ -8,7 +9,8 @@ import (
 // GetUserDetails handler to get user details
 var GetUserDetails = func() http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, req *http.Request) {
-		response, statusCode := getUserDetails.Execute(req)
+		ctx := context.TODO()
+		response, statusCode := getUserDetails.Execute(ctx, req)
 		generateResponse(responseWriter, statusCode, response)
 	}
 }

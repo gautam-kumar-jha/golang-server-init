@@ -1,6 +1,7 @@
 package token
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -36,7 +37,7 @@ func (registerService service) GetHandler() es.Handler {
 	}
 }
 
-func (token service) Execute(req *http.Request) (es.ResponseEnvelope, int) {
+func (token service) Execute(context context.Context, req *http.Request) (es.ResponseEnvelope, int) {
 	request := Request{}
 	response := es.ResponseEnvelope{}
 	reqBody, err := io.ReadAll(req.Body)
