@@ -31,7 +31,7 @@ func newService(name string, config app.Config) service {
 func (login service) GetHandler() es.Handler {
 	return es.Handler{
 		Method:      http.MethodPost,
-		Path:        "api/v1/users/login",
+		Path:        "/api/v1/users/login",
 		HandlerFunc: Login(),
 	}
 }

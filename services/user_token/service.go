@@ -32,7 +32,7 @@ func newService(name string, config app.Config) service {
 func (registerService service) GetHandler() es.Handler {
 	return es.Handler{
 		Method:      http.MethodPost,
-		Path:        "api/v1/users/token",
+		Path:        "/api/v1/users/token",
 		HandlerFunc: Token(),
 	}
 }

@@ -29,7 +29,7 @@ func newService(name string, config app.Config) service {
 func (registerService service) GetHandler() es.Handler {
 	return es.Handler{
 		Method:      http.MethodPost,
-		Path:        "api/v1/users/register",
+		Path:        "/api/v1/users/register",
 		HandlerFunc: RegisterUser(),
 	}
 }

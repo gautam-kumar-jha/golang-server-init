@@ -26,7 +26,7 @@ func newService(name string, config app.Config) service {
 func (login service) GetHandler() es.Handler {
 	return es.Handler{
 		Method:      http.MethodGet,
-		Path:        "api/v1/users/logout",
+		Path:        "/api/v1/users/logout",
 		HandlerFunc: Logout(),
 	}
 }

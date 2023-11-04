@@ -28,7 +28,7 @@ func newService(name string, config app.Config) service {
 func (getUserDetails service) GetHandler() es.Handler {
 	return es.Handler{
 		Method:      http.MethodGet,
-		Path:        "api/v1/users/details",
+		Path:        "/api/v1/users/details",
 		HandlerFunc: GetUserDetails(),
 	}
 }
