@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  golangserverdb:
+    image: mysql:latest
+    container_name: golangserverdb
+    environment:
+      MYSQL_ROOT_PASSWORD: devP
+      MYSQL_DATABASE: golangserver
+      MYSQL_USER: devU
+      MYSQL_PASSWORD: devP
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data:/var/lib/golangserver
+
+  golangserver:
+    build:
+      dockerfile: .docker/server.Dockerfile
+      context: .
+    container_name: golangserver
+    restart: always
+    environment:
+      ENV: dev
+      APP_NAME: golangserver
+      APP_PORT: 4080
+      MYSQL_USERNAME: devU
+      MYSQL_PASSWORD: devP
+      MYSQL_DBTYPE: mysql
+      MYSQL_DBNAME: golangserver
+      MYSQL_HOST: golangserverdb:3306
+    depends_on:
+      - golangserverdb
+    volumes:
+      - ./app/database/migrations:/app/database/migrations
+    ports: ['4085:4080']
