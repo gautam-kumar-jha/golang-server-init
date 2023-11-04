@@ -7,7 +7,6 @@ import (
 	"golang-server-init/app"
 	db "golang-server-init/app/database"
 	es "golang-server-init/app/service"
-	"golang-server-init/utils"
 	"io"
 	"log"
 	"math/rand"
@@ -114,7 +113,7 @@ func processData(userID string, password string, DBProcessor *sql.DB, config db.
 
 func deleteRow(userID string, DBProcessor *sql.DB) error {
 
-	delStmt, err := DBProcessor.Prepare("DELETE from token WHERE userID = ?")
+	delStmt, err := DBProcessor.Prepare("DELETE from Token WHERE userID = ?")
 	if err != nil {
 		log.Printf("unable to delete token %s", err.Error())
 		return fmt.Errorf("token error.")
@@ -131,9 +130,14 @@ func deleteRow(userID string, DBProcessor *sql.DB) error {
 }
 
 func getToken(uid string, pswd string) string {
-	rand.Seed(time.Now().UnixNano())
-	randomNum := rand.Intn(1000000)
-	tToken := fmt.Sprintf("%d|$|%s||F||A$$R||M$$IN$$GA||M %sD||A||T||E%s", randomNum, uid, pswd, time.Now().String())
-	token := strings.Trim(utils.EncryptMessage(tToken), " ")
-	return token
+	tToken := fmt.Sprintf("%s||F||A$$R||M$$IN$$GA||M %sD||A||T||E%s", uid, pswd, time.Now().String())
+	source := rand.NewSource(time.Now().UnixNano())
+	seededRand := rand.New(source)
+
+	token := make([]byte, len(tToken))
+	for i := range token {
+		token[i] = tToken[seededRand.Intn(len(tToken))]
+	}
+
+	return strings.ReplaceAll(string(token[:20]), " ", "")
 }

@@ -90,17 +90,13 @@ func processData(message string, DBProcessor *sql.DB, config db.Config) (bool, i
 
 	aToken := utils.EncryptMessage(message + "&&&&&&&&&&|||||||||||&Farmingam||||||" + message + time.Now().String())
 
-	err = updateRow(token, aToken, DBProcessor)
+	err = updateRow(token, aToken[:20], DBProcessor)
 	if err != nil {
 		log.Printf("database error %s", err.Error())
 		return false, response, fmt.Errorf("Login Failed.")
 	}
 
 	displayPage := "Show Profile"
-	isCartAvailable := isDataInCart(uID, DBProcessor)
-	if isCartAvailable {
-		displayPage = "Show ViewCart"
-	}
 
 	response.AuthToken = aToken
 	response.UserID = uID
@@ -111,7 +107,7 @@ func processData(message string, DBProcessor *sql.DB, config db.Config) (bool, i
 }
 
 func updateRow(token string, aToken string, DBProcessor *sql.DB) error {
-	delStmt, err := DBProcessor.Prepare("UPDATE token SET token = ?, tokenTime = ? WHERE token=?")
+	delStmt, err := DBProcessor.Prepare("UPDATE Token SET token = ?, tokenTime = ? WHERE token=?")
 	if err != nil {
 		log.Printf("unable to delete token %s", err.Error())
 		return fmt.Errorf("token error.")
@@ -129,20 +125,4 @@ func updateRow(token string, aToken string, DBProcessor *sql.DB) error {
 		return fmt.Errorf("token error.")
 	}
 	return nil
-}
-
-func isDataInCart(userID string, DBProcessor *sql.DB) bool {
-	mNo := strings.Split(userID, "||")[1]
-	is := false
-	var cCount int
-	cQuery := `SELECT COUNT(mobileNo) FROM Cart where mobileNo = ? `
-	err := DBProcessor.QueryRow(cQuery, mNo).Scan(&cCount)
-	if err != nil {
-		log.Printf("unable to fetch cart count %s", err.Error())
-	}
-	if cCount >= 1 {
-		is = true
-	}
-
-	return is
 }
