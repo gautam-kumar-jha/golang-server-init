@@ -2,7 +2,7 @@ package app
 
 import (
 	"golang-server-init/app/database"
-	"golang-server-init/app/security"
+	"golang-server-init/app/middleware"
 	"golang-server-init/app/service"
 	"log"
 	"net/http"
@@ -41,8 +41,8 @@ func (application *App) startServices() {
 }
 
 func (app *App) registerMiddleware() {
-	app.Router.Use(security.AuthorizeRequest(app.Router))
-	app.Router.Use(security.LogRequest(app.Router))
+	app.Router.Use(middleware.AuthorizeRequest(app.Router))
+	app.Router.Use(middleware.LogRequest(app.Router))
 }
 
 func (app *App) Start() {
