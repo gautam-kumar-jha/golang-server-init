@@ -38,7 +38,6 @@ Template to initiate the api server using golang and mysql.
         docker --version
 
 ## Run Application
-    run "docker-compose up -d"
-
+    Run "docker-compose up -d"
 
 
