@@ -31,3 +31,4 @@ services:
     volumes:
       - ./app/database/migrations:/golangserver/database/migrations
     ports: ['4085:4080']
+    hostname: golang-server
