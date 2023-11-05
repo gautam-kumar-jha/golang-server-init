@@ -14,14 +14,19 @@ Template to initiate the api server using golang and mysql.
     8. Integrating Independent Database for Development
 
 ## Required Software for Development
-1. Visual Studio Code
+    1. Visual Studio Code
 
 ## Required Software To Run
-windows : docker desktop
-linux : docker
+    1. Windows : Docker Desktop "https://docs.docker.com/desktop/install/windows-install/"
+    2. Linux : Docker
+        sudo apt update
+        sudo apt install docker-ce
+        sudo systemctl start docker
+        sudo systemctl enable docker
+        docker --version
 
 ## Run Application
-run "docker-compose up -d"
+    run "docker-compose up -d"
 
 
 
