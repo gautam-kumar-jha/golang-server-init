@@ -25,6 +25,7 @@ func NewApp() *App {
 		Services: []service.Service{},
 	}
 	app.Config.LoadConfig()
+	app.registerMiddleware()
 	database.MigrateDatabase(app.Config.DatabaseConfig)
 	return app
 }
