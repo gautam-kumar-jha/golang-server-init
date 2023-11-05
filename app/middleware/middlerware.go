@@ -24,12 +24,18 @@ func LogRequest(router *mux.Router) mux.MiddlewareFunc {
 func AuthorizeRequest(router *mux.Router) mux.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-			defer func() {
-				requestHeader := request.Header.Get("token")
-				if requestHeader != "jv" {
-					log.Panic("authorization falied")
+			isAuth := true
+			func() {
+				requestHeader := request.Header.Get("Golang-X-Server")
+				if requestHeader != "golangserver" {
+					log.Println("authorization falied")
+					isAuth = false
 				}
 			}()
+			if !isAuth {
+				http.Error(writer, "authorization falied", http.StatusUnauthorized)
+				return
+			}
 			next.ServeHTTP(writer, request)
 		})
 	}
