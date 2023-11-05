@@ -2,7 +2,7 @@
 # Golang Server Init
 Template to initiate the api server using golang and mysql.
 
-### Features:
+## Features:
     1. Easy to Clone and use.
     2. Used SOLID Pattern to develop SAAS
     3. Used Factory Pattern to initiate Object.
