@@ -8,7 +8,7 @@ import (
 	"golang-server-init/app"
 	db "golang-server-init/app/database"
 	es "golang-server-init/app/service"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -40,7 +40,7 @@ func (registerService service) Execute(context context.Context, req *http.Reques
 	request := Request{}
 	response := es.ResponseEnvelope{}
 
-	reqBody, err := ioutil.ReadAll(req.Body)
+	reqBody, err := io.ReadAll(req.Body)
 	if err != nil {
 		response.IsSucess = false
 		response.Message = "can not read request."
@@ -107,13 +107,13 @@ func processData(req *Request, DBProcessor *sql.DB, config db.Config) (bool, int
 	}
 
 	// add data in profile table
-	proSqlStmt, err := DBProcessor.Prepare("INSERT INTO UserProfile (userID, uName, uEmail) VALUES (?, ?, ?)")
+	proSqlStmt, err := DBProcessor.Prepare("INSERT INTO UserProfile (userID, uName, uEmail, uAddress) VALUES (?, ?, ?, ?)")
 	if err != nil {
 		log.Printf("error in user data insert statement %s", err.Error())
 		return false, response, fmt.Errorf("user data not inserted")
 	}
 	defer proSqlStmt.Close()
-	_, err = proSqlStmt.Exec(userID, name, email)
+	_, err = proSqlStmt.Exec(userID, name, email, "{}")
 	if err != nil {
 		log.Printf("error in user data insert %s", err.Error())
 		return false, response, fmt.Errorf("user data not inserted")
