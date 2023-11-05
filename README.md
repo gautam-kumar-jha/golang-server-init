@@ -1,6 +1,5 @@
 
 # Golang Server Init
-
 Template to initiate the api server using golang and mysql.
 
 ### Features:
