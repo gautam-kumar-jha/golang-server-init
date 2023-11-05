@@ -12,7 +12,7 @@ func LogRequest(router *mux.Router) mux.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 			defer func() {
-				requestHeader := request.Header.Get("token")
+				requestHeader := request.Header.Get("Golang-X-Server")
 				log.Printf("[%s] %s %s , %s", request.Method, request.Host, request.URL.Path, requestHeader)
 			}()
 			next.ServeHTTP(writer, request)
