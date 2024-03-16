@@ -1,6 +1,6 @@
 module golang-server-init
 
-go 1.21.6
+go 1.22.0
 
 require (
 	github.com/go-sql-driver/mysql v1.7.1
