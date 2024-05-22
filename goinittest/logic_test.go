@@ -14,7 +14,7 @@ func init() {
 func TestAdd(t *testing.T) {
 	fmt.Println(path)
 	result := SayHello()
-	expected := "helloy"
+	expected := "hello"
 	if result != expected {
 		t.Errorf("SayHello() = %s; want %s", result, expected)
 	}
