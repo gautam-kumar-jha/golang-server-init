@@ -12,4 +12,4 @@ jobs:
         go-version: '1.22'  
     - name: Run tests
       run: |
-        go test ./goinittest --arg=gautamjhatest
+        go test ./goinittest -v --arg=../utils
