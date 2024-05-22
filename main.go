@@ -5,6 +5,7 @@ import (
 	s "golang-server-init/services"
 )
 
+// main
 func main() {
 	vapp := app.NewApp()
 	s.Init(vapp)
