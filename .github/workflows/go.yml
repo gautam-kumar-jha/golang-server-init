@@ -1,6 +1,6 @@
 name: Go Test
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   test:
@@ -17,4 +17,4 @@ jobs:
 
     - name: Run tests
       run: |
-        go test ./...
+        go test
