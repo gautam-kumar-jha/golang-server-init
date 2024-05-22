@@ -1,25 +1,31 @@
-# This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+\name: Go Lint Check
 
-name: Go
-
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push, pull_request]
 
 jobs:
-  go-fmt-check:
+  golint-check:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
+
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: '1.22'
-    - name: Run go fmt
+        go-version: '1.22'  # Specify the Go version you are using
+
+    - name: Install golint
       run: |
-       go fmt ./...
-       git diff --exit-code
+        GO111MODULE=on go get -u golang.org/x/lint/golint
+
+    - name: Run golint
+      run: |
+        golint ./... | tee lint-results.txt
+        if grep -q . lint-results.txt; then
+          echo "Lint issues found"
+          cat lint-results.txt
+          exit 1
+        else
+          echo "No lint issues found"
+        fi
