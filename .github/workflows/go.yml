@@ -1,9 +1,9 @@
-name: Go Lint Check
+name: Go Test
 
 on: [push, pull_request]
 
 jobs:
-  golint-check:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,17 +15,6 @@ jobs:
       with:
         go-version: '1.22'  # Specify the Go version you are using
 
-    - name: Install golint
+    - name: Run tests
       run: |
-        GO111MODULE=on go get -u golang.org/x/lint/golint
-
-    - name: Run golint
-      run: |
-        golint ./... | tee lint-results.txt
-        if grep -q . lint-results.txt; then
-          echo "Lint issues found"
-          cat lint-results.txt
-          exit 1
-        else
-          echo "No lint issues found"
-        fi
+        go test ./...
