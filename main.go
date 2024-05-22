@@ -11,3 +11,7 @@ func main() {
 	s.Init(vapp)
 	defer vapp.Start()
 }
+
+func SayHello() string {
+	return "hello"
+}
