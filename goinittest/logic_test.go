@@ -4,7 +4,7 @@ import "testing"
 
 func TestAdd(t *testing.T) {
 	result := SayHello()
-	expected := "hello"
+	expected := "helloy"
 	if result != expected {
 		t.Errorf("SayHello() = %s; want %s", result, expected)
 	}
