@@ -3,6 +3,7 @@ package goinittest
 import (
 	"flag"
 	"fmt"
+	"os"
 	"testing"
 )
 
@@ -12,7 +13,8 @@ func init() {
 	flag.StringVar(&path, "arg", "", "first argument")
 }
 func TestAdd(t *testing.T) {
-	fmt.Println(path)
+	te, _ := os.Getwd()
+	fmt.Println("Test:", path+te)
 	result := SayHello()
 	expected := "hello"
 	if result != expected {
