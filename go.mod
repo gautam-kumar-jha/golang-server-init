@@ -1,10 +1,10 @@
 module golang-server-init
 
-go 1.22.2
+go 1.23.1
 
 require (
 	github.com/go-sql-driver/mysql v1.8.1
-	github.com/golang-migrate/migrate/v4 v4.17.1
+	github.com/golang-migrate/migrate/v4 v4.18.1
 	github.com/gorilla/mux v1.8.1
 )
 
